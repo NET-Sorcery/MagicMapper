@@ -8,6 +8,12 @@ MagicMapper is an object-object mapper.  Object-object mapping works by transfor
 
 Mapping code is boring.  Testing mapping code is even more boring.  MagicMapper provides simple configuration of types, as well as simple testing of mappings.  The real question may be "why use object-object mapping?"  Mapping can occur in many places in an application, but mostly in the boundaries between layers, such as between the UI/Domain layers, or Service/Domain layers.  Concerns of one layer often conflict with concerns in another, so object-object mapping leads to segregated models, where concerns for each layer can affect only types in that layer.
 
+Contrary to popular opinion that mapping is not needed, and AutoMapper (and MagicMapper being fork of it), I only partially agree. AutoMapper/MagicMapper don't needed for the large and complex project where mapping become complicated. Also AutoMapper/MagicMapper don't need for relatively simple projects, where you may not even mapping at all, since you don't have lot of code and lot of teams. But if you creating largish application, and setting up layers, and want these layers to be enforced, I think MagicMapper will have it's value. But you always should test your profiles using [Configuration Validation](Configuration-validation.html).
+
+## When not use MagicMapper?
+
+When your mapping between models of different layer have too complicated logic. Then you really need drop mapping for these parts, and start writing manual mapper. That's fine, that you use both approaches in the same application. No need to be super pedantic and use one tool for all jobs.
+
 ## How do I use MagicMapper?
 
 First, you need both a source and destination type to work with.  The destination type's design can be influenced by the layer in which it lives, but MagicMapper works best as long as the names of the members match up to the source type's members.  If you have a source member called "FirstName", this will automatically be mapped to a destination member with the name "FirstName".  MagicMapper also supports [Flattening](Flattening.html).
