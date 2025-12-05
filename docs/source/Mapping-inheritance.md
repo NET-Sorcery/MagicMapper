@@ -66,7 +66,7 @@ var mapped = mapper.Map(order, order.GetType(), typeof(OrderDto));
 Assert.IsType<OnlineOrderDto>(mapped);
 ```
 
-You will notice that because the mapped object is a OnlineOrder, AutoMapper has seen you have a more specific mapping for OnlineOrder than OrderDto, and automatically chosen that.
+You will notice that because the mapped object is a OnlineOrder, MagicMapper has seen you have a more specific mapping for OnlineOrder than OrderDto, and automatically chosen that.
 
 ## Specifying inheritance in derived classes
 
@@ -145,4 +145,4 @@ If you do want the `Referrer` property to be mapped in the mapping from `OnlineO
         .ForMember(o=>o.Referrer, m=>m.MapFrom(x=>x.Referrer));
 ```
 
-Overall this feature should make using AutoMapper with classes that leverage inheritance feel more natural.
+Overall this feature should make using MagicMapper with classes that leverage inheritance feel more natural.

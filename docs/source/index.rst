@@ -1,17 +1,17 @@
-AutoMapper
+MagicMapper
 ==========
 
 A convention-based object-object mapper.
 
-AutoMapper uses a fluent configuration API to define an object-object
-mapping strategy. AutoMapper uses a convention-based matching algorithm
-to match up source to destination values. AutoMapper is geared towards
+MagicMapper uses a fluent configuration API to define an object-object
+mapping strategy. MagicMapper uses a convention-based matching algorithm
+to match up source to destination values. MagicMapper is geared towards
 model projection scenarios to flatten complex object models to DTOs and
 other simple objects, whose design is better suited for serialization,
 communication, messaging, or simply an anti-corruption layer between the
 domain and application layer.
 
-New to AutoMapper? Check out the :doc:`Getting-started` page first.
+New to MagicMapper? Check out the :doc:`Getting-started` page first.
 
 .. _user-docs:
 

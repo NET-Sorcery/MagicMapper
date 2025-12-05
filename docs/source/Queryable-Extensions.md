@@ -1,8 +1,8 @@
 # Queryable Extensions
 
-When using an ORM such as NHibernate or Entity Framework with AutoMapper's standard `mapper.Map` functions, you may notice that the ORM will query all the fields of all the objects within a graph when AutoMapper is attempting to map the results to a destination type.
+When using an ORM such as NHibernate or Entity Framework with MagicMapper's standard `mapper.Map` functions, you may notice that the ORM will query all the fields of all the objects within a graph when MagicMapper is attempting to map the results to a destination type.
 
-If your ORM exposes `IQueryable`s, you can use AutoMapper's QueryableExtensions helper methods to address this key pain.
+If your ORM exposes `IQueryable`s, you can use MagicMapper's QueryableExtensions helper methods to address this key pain.
 
 Using Entity Framework for an example, say that you have an entity `OrderLine` with a relationship with an entity `Item`. If you want to map this to an `OrderLineDTO` with the `Item`'s `Name` property, the standard `mapper.Map` call will result in Entity Framework querying the entire `OrderLine` and `Item` table.
 
@@ -55,7 +55,7 @@ public List<OrderLineDTO> GetLinesForOrder(int orderId)
 }
 ```
 
-The `.ProjectTo<OrderLineDTO>()` will tell AutoMapper's mapping engine to emit a `select` clause to the IQueryable that will inform entity framework that it only needs to query the Name column of the Item table, same as if you manually projected your `IQueryable` to an `OrderLineDTO` with a `Select` clause.
+The `.ProjectTo<OrderLineDTO>()` will tell MagicMapper's mapping engine to emit a `select` clause to the IQueryable that will inform entity framework that it only needs to query the Name column of the Item table, same as if you manually projected your `IQueryable` to an `OrderLineDTO` with a `Select` clause.
 
 ### Query Provider Limitations
 
@@ -69,7 +69,7 @@ Starting with 8.0 there are similar ProjectTo methods on IMapper that feel more 
 
 ### Preventing lazy loading/SELECT N+1 problems
 
-Because the LINQ projection built by AutoMapper is translated directly to a SQL query by the query provider, the mapping occurs at the SQL/ADO.NET level, and not touching your entities. All data is eagerly fetched and loaded into your DTOs.
+Because the LINQ projection built by MagicMapper is translated directly to a SQL query by the query provider, the mapping occurs at the SQL/ADO.NET level, and not touching your entities. All data is eagerly fetched and loaded into your DTOs.
 
 Nested collections use a Select to project child DTOs:
 
@@ -91,7 +91,7 @@ select new InstructorIndexData.InstructorModel
 };
 ```
 
-This map through AutoMapper will result in a SELECT N+1 problem, as each child `Course` will be queried one at a time, unless specified through your ORM to eagerly fetch. With LINQ projection, no special configuration or specification is needed with your ORM. The ORM uses the LINQ projection to build the exact SQL query needed.
+This map through MagicMapper will result in a SELECT N+1 problem, as each child `Course` will be queried one at a time, unless specified through your ORM to eagerly fetch. With LINQ projection, no special configuration or specification is needed with your ORM. The ORM uses the LINQ projection to build the exact SQL query needed.
 
 That means that you don't need to use explicit eager loading (`Include`) with `ProjectTo`. If you need something like filtered `Include`, have the filter in your map:
 
@@ -110,7 +110,7 @@ var configuration = new MapperConfiguration(cfg => cfg.CreateProjection<Customer
     .ForMember(d => d.TotalContacts, opt => opt.MapFrom(c => c.Contacts.Count()));
 ```
 
-AutoMapper passes the supplied expression with the built projection. As long as your query provider can interpret the supplied expression, everything will be passed down all the way to the database.
+MagicMapper passes the supplied expression with the built projection. As long as your query provider can interpret the supplied expression, everything will be passed down all the way to the database.
 
 If the expression is rejected from your query provider (Entity Framework, NHibernate, etc.), you might need to tweak your expression until you find one that is accepted.
 
@@ -133,11 +133,11 @@ cfg.CreateProjection<Source, Dest>()
     .ConstructUsing(src => new Dest(src.Value + 10));
 ```
 
-AutoMapper will automatically match up destination constructor parameters to source members based on matching names, so only use this method if AutoMapper can't match up the destination constructor properly, or if you need extra customization during construction.
+MagicMapper will automatically match up destination constructor parameters to source members based on matching names, so only use this method if MagicMapper can't match up the destination constructor properly, or if you need extra customization during construction.
 
 ### String conversion
 
-AutoMapper will automatically add `ToString()` when the destination member type is a string and the source member type is not.
+MagicMapper will automatically add `ToString()` when the destination member type is a string and the source member type is not.
 
 ```c#
 public class Order {
@@ -152,7 +152,7 @@ orders[0].OrderType.ShouldEqual("Online");
 
 ### Explicit expansion
 
-In some scenarios, such as OData, a generic DTO is returned through an IQueryable controller action. Without explicit instructions, AutoMapper will expand all members in the result. To control which members are expanded during projection, set ExplicitExpansion in the configuration and then pass in the members you want to explicitly expand:
+In some scenarios, such as OData, a generic DTO is returned through an IQueryable controller action. Without explicit instructions, MagicMapper will expand all members in the result. To control which members are expanded during projection, set ExplicitExpansion in the configuration and then pass in the members you want to explicitly expand:
 
 ```c#
 dbContext.Orders.ProjectTo<OrderDto>(configuration,
@@ -168,13 +168,13 @@ dbContext.Orders.ProjectTo<OrderDto>(configuration,
     null,
     dest => dest.LineItems.Select(item => item.Product));
 ```
-For more information, see [the tests](https://github.com/AutoMapper/AutoMapper/search?p=1&q=ExplicitExpansion&utf8=%E2%9C%93).
+For more information, see [the tests](https://github.com/NET-Sorcery/MagicMapper/search?p=1&q=ExplicitExpansion&utf8=%E2%9C%93).
 
 ### Aggregations
 
-LINQ can support aggregate queries, and AutoMapper supports LINQ extension methods. In the custom projection example, if we renamed the `TotalContacts` property to `ContactsCount`, AutoMapper would match to the `Count()` extension method and the LINQ provider would translate the count into a correlated subquery to aggregate child records.
+LINQ can support aggregate queries, and MagicMapper supports LINQ extension methods. In the custom projection example, if we renamed the `TotalContacts` property to `ContactsCount`, MagicMapper would match to the `Count()` extension method and the LINQ provider would translate the count into a correlated subquery to aggregate child records.
 
-AutoMapper can also support complex aggregations and nested restrictions, if the LINQ provider supports it:
+MagicMapper can also support complex aggregations and nested restrictions, if the LINQ provider supports it:
 
 ```c#
 cfg.CreateProjection<Course, CourseModel>()
@@ -220,7 +220,7 @@ configuration.Internal().RecursiveQueriesMaxDepth = someRandomNumber;
 
 ### Supported mapping options
 
-Not all mapping options can be supported, as the expression generated must be interpreted by a LINQ provider. Only what is supported by LINQ providers is supported by AutoMapper:
+Not all mapping options can be supported, as the expression generated must be interpreted by a LINQ provider. Only what is supported by LINQ providers is supported by MagicMapper:
 * MapFrom (Expression-based)
 * ConvertUsing (Expression-based)
 * Ignore

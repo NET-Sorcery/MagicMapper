@@ -1,6 +1,6 @@
 # Before and After Map Action
 
-Occasionally, you might need to perform custom logic before or after a map occurs. These should be a rarity, as it's more obvious to do this work outside of AutoMapper. You can create global before/after map actions:
+Occasionally, you might need to perform custom logic before or after a map occurs. These should be a rarity, as it's more obvious to do this work outside of MagicMapper. You can create global before/after map actions:
 
 ```c#
 var configuration = new MapperConfiguration(cfg => {

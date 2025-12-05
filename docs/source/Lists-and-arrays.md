@@ -1,6 +1,6 @@
 # Lists and Arrays
 
-AutoMapper only requires configuration of element types, not of any array or list type that might be used.  For example, we might have a simple source and destination type:
+MagicMapper only requires configuration of element types, not of any array or list type that might be used.  For example, we might have a simple source and destination type:
 
 ```c#
 public class Source
@@ -44,13 +44,13 @@ To be specific, the source collection types supported include:
 * List\<T\>
 * Arrays
 
-For the non-generic enumerable types, only unmapped, assignable types are supported, as AutoMapper will be unable to "guess" what types you're trying to map.  As shown in the example above, it's not necessary to explicitly configure list types, only their member types.
+For the non-generic enumerable types, only unmapped, assignable types are supported, as MagicMapper will be unable to "guess" what types you're trying to map.  As shown in the example above, it's not necessary to explicitly configure list types, only their member types.
 
-When mapping to an existing collection, the destination collection is cleared first. If this is not what you want, take a look at [AutoMapper.Collection](https://github.com/AutoMapper/AutoMapper.Collection).
+When mapping to an existing collection, the destination collection is cleared first. If this is not what you want, take a look at [AutoMapper.Collection](https://github.com/NET-Sorcery/MagicMapper.Collection).
 
 ## Handling null collections
 
-When mapping a collection property, if the source value is null AutoMapper will map the destination field to an empty collection rather than setting the destination value to null. This aligns with the behavior of Entity Framework and Framework Design Guidelines that believe C# references, arrays, lists, collections, dictionaries and IEnumerables should NEVER be null, ever. 
+When mapping a collection property, if the source value is null MagicMapper will map the destination field to an empty collection rather than setting the destination value to null. This aligns with the behavior of Entity Framework and Framework Design Guidelines that believe C# references, arrays, lists, collections, dictionaries and IEnumerables should NEVER be null, ever. 
 
 This behavior can be changed by setting the `AllowNullCollections` property to true when configuring the mapper.
 
@@ -64,7 +64,7 @@ The setting can be applied globally and can be overridden per profile and per me
 
 ## Polymorphic element types in collections
 
-Many times, we might have a hierarchy of types in both our source and destination types.  AutoMapper supports polymorphic arrays and collections, such that derived source/destination types are used if found.
+Many times, we might have a hierarchy of types in both our source and destination types.  MagicMapper supports polymorphic arrays and collections, such that derived source/destination types are used if found.
 
 ```c#
 public class ParentSource
@@ -88,7 +88,7 @@ public class ChildDestination : ParentDestination
 }
 ```
 
-AutoMapper still requires explicit configuration for child mappings, as AutoMapper cannot "guess" which specific child destination mapping to use.  Here is an example of the above types:
+MagicMapper still requires explicit configuration for child mappings, as MagicMapper cannot "guess" which specific child destination mapping to use.  Here is an example of the above types:
 
 ```c#
 var configuration = new MapperConfiguration(c=> {

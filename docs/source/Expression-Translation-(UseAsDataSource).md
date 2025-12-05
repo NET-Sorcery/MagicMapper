@@ -49,7 +49,7 @@ var expression = mapper.Map<Expression<Func<OrderLine, bool>>>(dtoExpression);
 
 Expression will be translated to `ol => ol.Item.Name.StartsWith("A")`
 
-Automapper knows `dto.Item` is mapped to `ol.Item.Name` so it substituted it for the expression.
+MagicMapper knows `dto.Item` is mapped to `ol.Item.Name` so it substituted it for the expression.
 
 Expression translation can work on expressions of collections as well.
 
@@ -62,7 +62,7 @@ Resulting in `ols => ols.Where(ol => ol.Quantity > 5).OrderBy(ol => ol.Quantity)
 
 ### Mapping Flattened Properties to Navigation Properties
 
-AutoMapper also supports mapping flattened (TModel or DTO) properties in expressions to their corresponding (TData) navigation properties (when the navigation property has been removed from the view model or DTO) e.g. CourseModel.DepartmentName from the model expression becomes Course.Department in the data expression.
+MagicMapper also supports mapping flattened (TModel or DTO) properties in expressions to their corresponding (TData) navigation properties (when the navigation property has been removed from the view model or DTO) e.g. CourseModel.DepartmentName from the model expression becomes Course.Department in the data expression.
 
 Take the following set of classes:
 

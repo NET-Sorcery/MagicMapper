@@ -1,6 +1,6 @@
 # Construction
 
-AutoMapper can map to destination constructors based on source members:
+MagicMapper can map to destination constructors based on source members:
 
 ```c#
 public class Source {

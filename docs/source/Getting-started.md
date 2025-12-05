@@ -1,18 +1,18 @@
 # Getting Started Guide
 
-## What is AutoMapper?
+## What is MagicMapper?
 
-AutoMapper is an object-object mapper.  Object-object mapping works by transforming an input object of one type into an output object of a different type.  What makes AutoMapper interesting is that it provides some interesting conventions to take the dirty work out of figuring out how to map type A to type B.  As long as type B follows AutoMapper's established convention, almost zero configuration is needed to map two types.
+MagicMapper is an object-object mapper.  Object-object mapping works by transforming an input object of one type into an output object of a different type.  What makes MagicMapper interesting is that it provides some interesting conventions to take the dirty work out of figuring out how to map type A to type B.  As long as type B follows MagicMapper's established convention, almost zero configuration is needed to map two types.
 
-## Why use AutoMapper?
+## Why use MagicMapper?
 
-Mapping code is boring.  Testing mapping code is even more boring.  AutoMapper provides simple configuration of types, as well as simple testing of mappings.  The real question may be "why use object-object mapping?"  Mapping can occur in many places in an application, but mostly in the boundaries between layers, such as between the UI/Domain layers, or Service/Domain layers.  Concerns of one layer often conflict with concerns in another, so object-object mapping leads to segregated models, where concerns for each layer can affect only types in that layer.
+Mapping code is boring.  Testing mapping code is even more boring.  MagicMapper provides simple configuration of types, as well as simple testing of mappings.  The real question may be "why use object-object mapping?"  Mapping can occur in many places in an application, but mostly in the boundaries between layers, such as between the UI/Domain layers, or Service/Domain layers.  Concerns of one layer often conflict with concerns in another, so object-object mapping leads to segregated models, where concerns for each layer can affect only types in that layer.
 
-## How do I use AutoMapper?
+## How do I use MagicMapper?
 
-First, you need both a source and destination type to work with.  The destination type's design can be influenced by the layer in which it lives, but AutoMapper works best as long as the names of the members match up to the source type's members.  If you have a source member called "FirstName", this will automatically be mapped to a destination member with the name "FirstName".  AutoMapper also supports [Flattening](Flattening.html).
+First, you need both a source and destination type to work with.  The destination type's design can be influenced by the layer in which it lives, but MagicMapper works best as long as the names of the members match up to the source type's members.  If you have a source member called "FirstName", this will automatically be mapped to a destination member with the name "FirstName".  MagicMapper also supports [Flattening](Flattening.html).
 
-AutoMapper will ignore null reference exceptions when mapping your source to your target. This is by design. If you don't like this approach, you can combine AutoMapper's approach with [custom value resolvers](Custom-value-resolvers.html) if needed.
+MagicMapper will ignore null reference exceptions when mapping your source to your target. This is by design. If you don't like this approach, you can combine MagicMapper's approach with [custom value resolvers](Custom-value-resolvers.html) if needed.
 
 Once you have your types you can create a map for the two types using a `MapperConfiguration` and CreateMap. You only need one `MapperConfiguration` instance typically per AppDomain and should be instantiated during startup. More examples of initial setup can be seen in [Setup](Setup.html).
 
@@ -31,13 +31,13 @@ OrderDto dto = mapper.Map<OrderDto>(order);
 
 Most applications can use dependency injection to inject the created `IMapper` instance.
 
-AutoMapper also has non-generic versions of these methods, for those cases where you might not know the type at compile time.
+MagicMapper also has non-generic versions of these methods, for those cases where you might not know the type at compile time.
 
-## Where do I configure AutoMapper?
+## Where do I configure MagicMapper?
 
 Configuration should only happen once per AppDomain.  That means the best place to put the configuration code is in application startup, such as the Global.asax file for ASP.NET applications.  Typically, the configuration bootstrapper class is in its own class, and this bootstrapper class is called from the startup method. The bootstrapper class should construct a `MapperConfiguration` object to configure the type maps.
 
-For ASP.NET Core the [Dependency Injection](Dependency-injection.html#asp-net-core) article shows how to configure AutoMapper in your application.
+For ASP.NET Core the [Dependency Injection](Dependency-injection.html#asp-net-core) article shows how to configure MagicMapper in your application.
 
 ## How do I test my mappings?
 

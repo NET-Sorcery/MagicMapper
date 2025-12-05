@@ -1,6 +1,6 @@
 # Projection
 
-Projection transforms a source to a destination beyond flattening the object model.  Without extra configuration, AutoMapper requires a flattened destination to match the source type's naming structure.  When you want to project source values into a destination that does not exactly match the source structure, you must specify custom member mapping definitions.  For example, we might want to turn this source structure:
+Projection transforms a source to a destination beyond flattening the object model.  Without extra configuration, MagicMapper requires a flattened destination to match the source type's naming structure.  When you want to project source values into a destination that does not exactly match the source structure, you must specify custom member mapping definitions.  For example, we might want to turn this source structure:
 ```c#
 public class CalendarEvent
 {
@@ -31,7 +31,7 @@ var calendarEvent = new CalendarEvent
 	Title = "Company Holiday Party"
 };
 
-// Configure AutoMapper
+// Configure MagicMapper
 var configuration = new MapperConfiguration(cfg =>
   cfg.CreateMap<CalendarEvent, CalendarEventForm>()
 	.ForMember(dest => dest.EventDate, opt => opt.MapFrom(src => src.Date.Date))

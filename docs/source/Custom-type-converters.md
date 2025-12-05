@@ -24,7 +24,7 @@ public class Destination
 }
 ```
 
-If we were to try and map these two types as-is, AutoMapper would throw an exception (at map time and configuration-checking time), as AutoMapper does not know about any mapping from string to int, DateTime or Type.  To create maps for these types, we must supply a custom type converter, and we have three ways of doing so:
+If we were to try and map these two types as-is, MagicMapper would throw an exception (at map time and configuration-checking time), as MagicMapper does not know about any mapping from string to int, DateTime or Type.  To create maps for these types, we must supply a custom type converter, and we have three ways of doing so:
 
 ```c#
 void ConvertUsing(Func<TSource, TDestination> mappingFunction);
@@ -41,7 +41,7 @@ public interface ITypeConverter<in TSource, TDestination>
 }
 ```
 
-And supply AutoMapper with either an instance of a custom type converter, or simply the type, which AutoMapper will instantiate at run time.  The mapping configuration for our above source/destination types then becomes:
+And supply MagicMapper with either an instance of a custom type converter, or simply the type, which MagicMapper will instantiate at run time.  The mapping configuration for our above source/destination types then becomes:
 
 ```c#
 [Test]

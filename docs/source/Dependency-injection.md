@@ -4,7 +4,7 @@
 
 ### ASP.NET Core
 
-There is a [NuGet package](https://www.nuget.org/packages/AutoMapper.Extensions.Microsoft.DependencyInjection/) to be used with the default injection mechanism described [here](https://github.com/AutoMapper/AutoMapper.Extensions.Microsoft.DependencyInjection) and used in [this project](https://github.com/jbogard/ContosoUniversityCore/blob/master/src/ContosoUniversityCore/Startup.cs).
+There is a [NuGet package](https://www.nuget.org/packages/AutoMapper.Extensions.Microsoft.DependencyInjection/) to be used with the default injection mechanism described [here](https://github.com/NET-Sorcery/MagicMapper.Extensions.Microsoft.DependencyInjection) and used in [this project](https://github.com/jbogard/ContosoUniversityCore/blob/master/src/ContosoUniversityCore/Startup.cs).
 
 Starting with version 13.0, `AddAutoMapper` is part of the core package and the DI package is discontinued.
 
@@ -16,7 +16,7 @@ or marker types:
 ```c#
 services.AddAutoMapper(typeof(ProfileTypeFromAssembly1), typeof(ProfileTypeFromAssembly2) /*, ...*/);
 ```
-Now you can inject AutoMapper at runtime into your services/controllers:
+Now you can inject MagicMapper at runtime into your services/controllers:
 ```c#
 public class EmployeesController {
 	private readonly IMapper _mapper;
@@ -32,11 +32,11 @@ There is a third-party [NuGet package](https://www.nuget.org/packages/AutoMapper
 
 Also, check [this blog](https://dotnetfalcon.com/autofac-support-for-automapper/).
 
-### [Other DI engines](https://github.com/AutoMapper/AutoMapper/wiki/DI-examples)
+### [Other DI engines](https://github.com/NET-Sorcery/MagicMapper/wiki/DI-examples)
 
 ## Low level API-s
 
-AutoMapper supports the ability to construct [Custom Value Resolvers](Custom-value-resolvers.html), [Custom Type Converters](Custom-type-converters.html), and [Value Converters](Value-converters.html) using static service location:
+MagicMapper supports the ability to construct [Custom Value Resolvers](Custom-value-resolvers.html), [Custom Type Converters](Custom-type-converters.html), and [Value Converters](Value-converters.html) using static service location:
 
 ```c#
 var configuration = new MapperConfiguration(cfg =>

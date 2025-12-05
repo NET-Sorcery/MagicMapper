@@ -15,7 +15,7 @@ Starting with 9.0, the static API is no longer available.
 
 ## Gathering configuration before initialization
 
-AutoMapper also lets you gather configuration before initialization:
+MagicMapper also lets you gather configuration before initialization:
 
 ```c#
 var cfg = new MapperConfigurationExpression();

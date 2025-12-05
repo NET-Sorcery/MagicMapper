@@ -31,7 +31,7 @@ var configuration = new MapperConfiguration(cfg => {
 });
 ```
 
-By calling `ReverseMap`, AutoMapper creates a reverse mapping configuration that includes unflattening:
+By calling `ReverseMap`, MagicMapper creates a reverse mapping configuration that includes unflattening:
 
 ```c#
 var customer = new Customer {
@@ -56,7 +56,7 @@ Unflattening is only configured for `ReverseMap`. If you want unflattening, you 
 
 ### Customizing reverse mapping
 
-AutoMapper will automatically reverse map "Customer.Name" from "CustomerName" based on the original flattening. If you use MapFrom, AutoMapper will attempt to reverse the map:
+MagicMapper will automatically reverse map "Customer.Name" from "CustomerName" based on the original flattening. If you use MapFrom, MagicMapper will attempt to reverse the map:
 
 ```c#
 cfg.CreateMap<Order, OrderDto>()
@@ -64,7 +64,7 @@ cfg.CreateMap<Order, OrderDto>()
   .ReverseMap();
 ```
 
-As long as the `MapFrom` path are member accessors, AutoMapper will unflatten from the same path (`CustomerName` => `Customer.Name`).
+As long as the `MapFrom` path are member accessors, MagicMapper will unflatten from the same path (`CustomerName` => `Customer.Name`).
 
 If you need to customize this, for a reverse map you can use `ForPath`:
 

@@ -1,8 +1,8 @@
 # Configuration Validation
 
-Hand-rolled mapping code, though tedious, has the advantage of being testable.  One of the inspirations behind AutoMapper was to eliminate not just the custom mapping code, but eliminate the need for manual testing.  Because the mapping from source to destination is convention-based, you will still need to test your configuration.
+Hand-rolled mapping code, though tedious, has the advantage of being testable.  One of the inspirations behind MagicMapper was to eliminate not just the custom mapping code, but eliminate the need for manual testing.  Because the mapping from source to destination is convention-based, you will still need to test your configuration.
 
-AutoMapper provides configuration testing in the form of the AssertConfigurationIsValid method.  Suppose we have slightly misconfigured our source and destination types:
+MagicMapper provides configuration testing in the form of the AssertConfigurationIsValid method.  Suppose we have slightly misconfigured our source and destination types:
 ```c#
 public class Source
 {
@@ -41,7 +41,7 @@ var configuration = new MapperConfiguration(cfg =>
 
 ## Selecting members to validate
 
-By default, AutoMapper uses the destination type to validate members. It assumes that all destination members need to be mapped. To modify this behavior, use the `CreateMap` overload to specify which member list to validate against:
+By default, MagicMapper uses the destination type to validate members. It assumes that all destination members need to be mapped. To modify this behavior, use the `CreateMap` overload to specify which member list to validate against:
 
 ```c#
 var configuration = new MapperConfiguration(cfg =>
@@ -55,4 +55,4 @@ To skip validation altogether for this map, use `MemberList.None`. That's the de
 
 ## Custom validations
 
-You can add custom validations through an extension point. See [here](https://github.com/AutoMapper/AutoMapper/blob/master/src/UnitTests/CustomValidations.cs).
+You can add custom validations through an extension point. See [here](https://github.com/NET-Sorcery/MagicMapper/blob/master/src/UnitTests/CustomValidations.cs).

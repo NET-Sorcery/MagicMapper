@@ -1,6 +1,6 @@
 # Custom Value Resolvers
 
-Although AutoMapper covers quite a few destination member mapping scenarios, there are the 1 to 5% of destination values that need a little help in resolving.  Many times, this custom value resolution logic is domain logic that can go straight on our domain.  However, if this logic pertains only to the mapping operation, it would clutter our source types with unnecessary behavior.  In these cases, AutoMapper allows for configuring custom value resolvers for destination members.  For example, we might want to have a calculated value just during mapping:
+Although MagicMapper covers quite a few destination member mapping scenarios, there are the 1 to 5% of destination values that need a little help in resolving.  Many times, this custom value resolution logic is domain logic that can go straight on our domain.  However, if this logic pertains only to the mapping operation, it would clutter our source types with unnecessary behavior.  In these cases, MagicMapper allows for configuring custom value resolvers for destination members.  For example, we might want to have a calculated value just during mapping:
 
 ```c#
 public class Source
@@ -36,13 +36,13 @@ public class CustomResolver : IValueResolver<Source, Destination, int>
 }
 ```
 
-Once we have our IValueResolver implementation, we'll need to tell AutoMapper to use this custom value resolver when resolving a specific destination member.  We have several options in telling AutoMapper a custom value resolver to use, including:
+Once we have our IValueResolver implementation, we'll need to tell MagicMapper to use this custom value resolver when resolving a specific destination member.  We have several options in telling MagicMapper a custom value resolver to use, including:
 
 * MapFrom\<TValueResolver\>
 * MapFrom(typeof(CustomValueResolver))
 * MapFrom(aValueResolverInstance)
 
-In the below example, we'll use the first option, telling AutoMapper the custom resolver type through generics:
+In the below example, we'll use the first option, telling MagicMapper the custom resolver type through generics:
 
 ```c#
 var configuration = new MapperConfiguration(cfg =>
@@ -75,9 +75,9 @@ public class MultBy2Resolver : IValueResolver<object, object, int> {
 
 ### Custom constructor methods
 
-Because we only supplied the type of the custom resolver to AutoMapper, the mapping engine will use reflection to create an instance of the value resolver.
+Because we only supplied the type of the custom resolver to MagicMapper, the mapping engine will use reflection to create an instance of the value resolver.
 
-If we don't want AutoMapper to use reflection to create the instance, we can supply it directly:
+If we don't want MagicMapper to use reflection to create the instance, we can supply it directly:
 
 ```c#
 var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destination>()
@@ -86,7 +86,7 @@ var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Source, Destina
 	));
 ```
 
-AutoMapper will use that specific object, helpful in scenarios where the resolver might have constructor arguments or need to be constructed by an IoC container.
+MagicMapper will use that specific object, helpful in scenarios where the resolver might have constructor arguments or need to be constructed by an IoC container.
 
 ### The resolved value is mapped to the destination property
 
@@ -94,7 +94,7 @@ Note that the value you return from your resolver is not simply assigned to the 
 
 ### Customizing the source value supplied to the resolver
 
-By default, AutoMapper passes the source object to the resolver. This limits the reusability of resolvers, since the resolver is coupled to the source type. If, however, we supply a common resolver across multiple types, we configure AutoMapper to redirect the source value supplied to the resolver, and also use a different resolver interface so that our resolver can get use of the source/destination members:
+By default, MagicMapper passes the source object to the resolver. This limits the reusability of resolvers, since the resolver is coupled to the source type. If, however, we supply a common resolver across multiple types, we configure MagicMapper to redirect the source value supplied to the resolver, and also use a different resolver interface so that our resolver can get use of the source/destination members:
 
 ```c#
 var configuration = new MapperConfiguration(cfg => {
@@ -131,11 +131,11 @@ Starting with version 13.0, you can use `context.State` instead, in a similar wa
 
 ### ForPath
 
-Similar to ForMember, from 6.1.0 there is ForPath. Check out [the tests](https://github.com/AutoMapper/AutoMapper/search?utf8=%E2%9C%93&q=ForPath&type=) for examples.
+Similar to ForMember, from 6.1.0 there is ForPath. Check out [the tests](https://github.com/NET-Sorcery/MagicMapper/search?utf8=%E2%9C%93&q=ForPath&type=) for examples.
 
 ### Resolvers and conditions
 
-For each property mapping, AutoMapper attempts to resolve the destination value **before** evaluating the condition. So it needs to be able to do that without throwing an exception even if the condition will prevent the resulting value from being used.
+For each property mapping, MagicMapper attempts to resolve the destination value **before** evaluating the condition. So it needs to be able to do that without throwing an exception even if the condition will prevent the resulting value from being used.
 
 As an example, here's sample output from [BuildExecutionPlan](Understanding-your-mapping.html) (displayed using [ReadableExpressions](https://marketplace.visualstudio.com/items?itemName=vs-publisher-1232914.ReadableExpressionsVisualizers)) for a single property:
 

@@ -64,7 +64,7 @@ public class OrderDto
 }
 ```
 
-When you configure a source/destination type pair in AutoMapper, the configurator attempts to match properties and methods on the source type to properties on the destination type.  If for any property on the destination type a property, method, or a method prefixed with "Get" does not exist on the source type, AutoMapper splits the destination member name into individual words (by PascalCase conventions).
+When you configure a source/destination type pair in MagicMapper, the configurator attempts to match properties and methods on the source type to properties on the destination type.  If for any property on the destination type a property, method, or a method prefixed with "Get" does not exist on the source type, MagicMapper splits the destination member name into individual words (by PascalCase conventions).
 
 ```c#
 // Complex model
@@ -84,7 +84,7 @@ var bosco = new Product
 	};
 order.AddOrderLineItem(bosco, 15);
 
-// Configure AutoMapper
+// Configure MagicMapper
 
 var configuration = new MapperConfiguration(cfg => cfg.CreateMap<Order, OrderDto>());
 
@@ -96,7 +96,7 @@ dto.CustomerName.ShouldEqual("George Costanza");
 dto.Total.ShouldEqual(74.85m);
 ```
 
-We configured the type map in AutoMapper with the CreateMap method.  AutoMapper can only map type pairs it knows about, so we have explicitly register the source/destination type pair with CreateMap.  To perform the mapping, we use the Map method.
+We configured the type map in MagicMapper with the CreateMap method.  MagicMapper can only map type pairs it knows about, so we have explicitly register the source/destination type pair with CreateMap.  To perform the mapping, we use the Map method.
 
 On the OrderDto type, the Total property matched to the GetTotal() method on Order.  The CustomerName property matched to the Customer.Name property on Order.  As long as we name our destination properties appropriately, we do not need to configure individual property matching.
 
@@ -157,4 +157,4 @@ ForPath(destination => destination.IncludedMember, member => member.MapFrom(sour
 ```
 and the other way around. If that's not what you want, you can avoid `ReverseMap` (explicitly create the reverse map) or you can override the default settings (using `Ignore` or `IncludeMembers` without parameters respectively).
 
-For details, check [the tests](https://github.com/AutoMapper/AutoMapper/blob/master/src/UnitTests/IMappingExpression/IncludeMembers.cs).
+For details, check [the tests](https://github.com/NET-Sorcery/MagicMapper/blob/master/src/UnitTests/IMappingExpression/IncludeMembers.cs).

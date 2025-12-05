@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'AutoMapper'
-copyright = '2024, Jimmy Bogard'
-author = 'Jimmy Bogard'
+project = 'MagicMapper'
+copyright = '2024, Jimmy Bogard, 2025 Andrii Kurdiumov'
+author = 'Jimmy Bogard, Andrii Kurdiumov'
 
 # -- General configuration
 
