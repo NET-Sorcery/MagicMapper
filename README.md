@@ -1,4 +1,8 @@
-![MagicMapper](https://s3.amazonaws.com/automapper/logo.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ТвійЮзернейм/ТвійРепо/main/docs/source/img/magicmapper-w-logo.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ТвійЮзернейм/ТвійРепо/main/docs/source/img/magicmapper-b-logo.png">
+  <img alt="MagicMapper Logo" src="https://raw.githubusercontent.com/ТвійЮзернейм/ТвійРепо/main/docs/source/img/magicmapper-b-logo.png">
+</picture>
 
 [![CI](https://github.com/NET-Sorcery/MagicMapper/workflows/CI/badge.svg)](https://github.com/kant2002/MagicMapper/actions?query=workflow%3ACI)
 [![NuGet](http://img.shields.io/nuget/vpre/MagicMapper.svg?label=NuGet)](https://www.nuget.org/packages/MagicMapper/)
