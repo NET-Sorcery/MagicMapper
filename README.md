@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ТвійЮзернейм/ТвійРепо/main/docs/source/img/magicmapper-w-logo.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ТвійЮзернейм/ТвійРепо/main/docs/source/img/magicmapper-b-logo.png">
-  <img alt="MagicMapper Logo" src="https://raw.githubusercontent.com/ТвійЮзернейм/ТвійРепо/main/docs/source/img/magicmapper-b-logo.png">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/source/img/magicmapper-w-logo.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/source/img/magicmapper-b-logo.png">
+  <img alt="MagicMapper Logo" src="docs/source/img/magicmapper-b-logo.png">
 </picture>
 
 [![CI](https://github.com/NET-Sorcery/MagicMapper/workflows/CI/badge.svg)](https://github.com/kant2002/MagicMapper/actions?query=workflow%3ACI)
