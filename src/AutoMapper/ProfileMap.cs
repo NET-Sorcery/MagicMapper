@@ -168,7 +168,7 @@ public sealed class ProfileMap
     }
     private void Configure(TypeMapConfiguration typeMapConfiguration, IGlobalConfiguration configuration)
     {
-        var typeMap = typeMapConfiguration.TypeMap;
+        var typeMap = configuration.FindTypeMapFor(typeMapConfiguration.Types) ?? typeMapConfiguration.TypeMap;
         if (typeMap.IncludeAllDerivedTypes)
         {
             IncludeAllDerived(configuration, typeMap);
