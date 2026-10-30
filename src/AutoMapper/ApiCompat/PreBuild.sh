@@ -11,5 +11,16 @@ fi
 oldVersion="$oldVersion.0.0"
 echo $oldVersion
 rm -rf ../LastMajorVersionBinary
-curl https://globalcdn.nuget.org/packages/automapper.$oldVersion.nupkg --create-dirs -o ../LastMajorVersionBinary/automapper.$oldVersion.nupkg
-unzip -j ../LastMajorVersionBinary/automapper.$oldVersion.nupkg lib/netstandard2.1/AutoMapper.dll -d ../LastMajorVersionBinary
+mkdir -p ../LastMajorVersionBinary
+nupkg=../LastMajorVersionBinary/automapper.$oldVersion.nupkg
+curl https://globalcdn.nuget.org/packages/automapper.$oldVersion.nupkg --create-dirs -o "$nupkg"
+# Prefer a modern netX.Y contract; fall back to whatever lib TFM the package ships.
+dll=$(unzip -Z1 "$nupkg" | awk '/^lib\/net[0-9].*\/AutoMapper\.dll$/ { print; exit }')
+if [[ -z "$dll" ]]; then
+    dll=$(unzip -Z1 "$nupkg" | awk '/^lib\/.*\/AutoMapper\.dll$/ { print; exit }')
+fi
+if [[ -z "$dll" ]]; then
+    echo "AutoMapper.dll was not found in $nupkg" >&2
+    exit 1
+fi
+unzip -j "$nupkg" "$dll" -d ../LastMajorVersionBinary
